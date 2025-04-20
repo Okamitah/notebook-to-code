@@ -20,10 +20,38 @@ def main():
 
 def handle_py(file_path):
     print(f"Processing Python file: {file_path}")
-    with open(file_path, "r") as file:
-        content = file.readlines()
+    with open(file_path, "r") as original_file:
+        content_lines = original_file.readlines()
 
-        print(content)
+    with open(f'new_file.ipynb', 'x') as new_file:
+        for line in content_lines:
+            new_file.writelines("{\n")
+            for key, value in line_py_ipynb(line).items():
+                new_file.writelines(f'"{key}": "{value}"\n')
+            new_file.writelines("},\n")
+
+
+def line_py_ipynb(line):
+    if line.startswith("#"):
+        cell =  {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+                f"{line}"
+            ]
+        }
+    else:
+        cell =   {
+            "cell_type": "code",
+            "execution_count": 1,
+            "metadata": {},
+            "outputs": [],
+            "source": [
+                f"{line}"
+            ]
+        }
+    return cell
+
 
 
 def handle_ipynb(filename):
