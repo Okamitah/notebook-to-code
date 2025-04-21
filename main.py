@@ -27,27 +27,29 @@ def handle_py(file_path):
         for line in content_lines:
             new_file.writelines("{\n")
             for key, value in line_py_ipynb(line).items():
-                new_file.writelines(f'"{key}": "{value}"\n')
+                new_file.writelines(f'{key}: {value},\n')
             new_file.writelines("},\n")
+        
+
 
 
 def line_py_ipynb(line):
     if line.startswith("#"):
         cell =  {
-            "cell_type": "markdown",
-            "metadata": {},
-            "source": [
+            '"cell_type"': '"markdown"',
+            '"metadata"': {},
+            '"source"': [
                 f"{line}"
             ]
         }
     else:
         cell =   {
-            "cell_type": "code",
-            "execution_count": 1,
-            "metadata": {},
-            "outputs": [],
-            "source": [
-                f"{line}"
+            '"cell_type"': '"code"',
+            '"execution_count"': 1,
+            '"metadata"': {},
+            '"outputs"': [],
+            '"source"': [
+                f'{line}'
             ]
         }
     return cell
@@ -56,6 +58,31 @@ def line_py_ipynb(line):
 
 def handle_ipynb(filename):
     print(filename)
+
+tail =  {
+    "metadata": {
+        "kernelspec": {
+            "display_name": "Python 3 (ipykernel)",
+            "language": "python",
+            "name": "myenv"
+        },
+        "language_info": {
+            "codemirror_mode": {
+                "name": "ipython",
+                "version": 3
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3",
+            "version": "3.13.2"
+        }
+    },
+    "nbformat": 4,
+    "nbformat_minor": 5}
+
+
 
 if __name__ == "__main__":
     main()
