@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+notpyvert/__init__.py
+notpyvert/main.py
+notpyvert/utils.py
+notpyvert.egg-info/PKG-INFO
+notpyvert.egg-info/SOURCES.txt
+notpyvert.egg-info/dependency_links.txt
+notpyvert.egg-info/entry_points.txt
+notpyvert.egg-info/top_level.txt
+tests/test_utils.py
